@@ -12,6 +12,8 @@ def generate_embed():
         pdata = request.args.get("d")
         rdata = base64.b64decode(pdata.encode('ascii')).decode('ascii')
         data = json.loads(rdata)
+        if not 'large' in data:
+            return render_template('embed.html', url=data['url'], image=data['image'], description=data['description'], color=data['color'], title=data['title'])
         if data['large'] == True:
             return render_template('large_embed.html', url=data['url'], image=data['image'], description=data['description'], color=data['color'], title=data['title'])
         else:
